@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS run</title>
+
+    <style>
+
+        body
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .form-validadion
+        {
+            width: 25rem;
+            text-align: center;
+            border-radius: 0.7rem;
+            height: 3rem;
+
+            font-size: 3rem;
+            font-family: monospace;
+            letter-spacing: 0.2rem;
+
+            transition: 0.3s;
+
+            border: 0.2rem solid rgb(54, 54, 54);
+            margin-top: 4.5rem;
+            outline: none;
+        }  
+        .button
+        {
+            width: 200px;
+            height: 50px;
+            background: transparent;
+            border-radius: 5px;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            margin-top: 1rem;
+            font-size: 1.5rem;
+
+            transition: 0.3s;
+        }
+        button:hover
+        {
+            background: #000;
+            color: #fff;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+     <!-- teste de push javascripts -->
+
+     <form class="form-main" action="">
+        <input id="formName" type="text" placeholder="username" name="name" class="form-validadion">
+        <br>
+        <input maxlength="8" id="formPassword" type="password" placeholder="password" name="password" class="form-validadion">
+        <br>
+        <button type="button" onclick="sendForm()" class="button">Criar</button>
+    </form>
+
+    <script>
+
+            // dados salvos
+            var dadosNames = [];
+            var dadosPass = [];
+            
+            // button enviar
+            function sendForm() {
+
+                // valor dos inputs
+               let name = document.getElementById("formName").value;
+               let pass = document.getElementById("formPassword").value;
+ 
+                if(name !== "" && pass !== ""){
+
+                // joga valor do input/name dentro da array dadosLista... 
+                // dadosNames.push(name);
+
+                if(name.length >= 5 && pass.length >= 5)
+                {
+                    dadosNames.push(name);
+                    dadosPass.push(pass);
+                }else
+                {
+                    alert("Seu nome é muito pequeno")
+                }
+
+                addList();
+                console.log("lista de nome :")
+                console.log(dadosNames);
+                console.log("lista de senhas :")
+                console.log(dadosPass)
+
+                document.getElementById('formName').value = "";
+
+                } else
+                // caso o usuario não digite nada no input e enviar ele chama o alert abaixo
+                {
+                        alert("Os campos não estãos preenchidos");
+                };
+            }
+            function addList()
+            {
+                
+            }
+
+    </script>
+
+</body>
+</html>
