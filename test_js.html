@@ -13,39 +13,50 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        }
+        .form-main
+        {
+            border: 1px solid #888;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.575);
+            position: absolute;
+            width: 50%;
+            height: calc(100% - 2px);
+            margin-left: 25%;
         }
         .form-validadion
         {
-            width: 25rem;
-            text-align: center;
-            border-radius: 0.7rem;
+            width: 90%;
             height: 3rem;
 
-            font-size: 3rem;
-            font-family: monospace;
+            font-size: 1.5rem;
             letter-spacing: 0.2rem;
+            padding-left: 0.5rem;
 
-            transition: 0.3s;
-
-            border: 0.2rem solid rgb(54, 54, 54);
-            margin-top: 4.5rem;
             outline: none;
+
+            border: 0.01rem solid;
+
+            margin-left: 5%;
+            margin-top: 1.5rem;
+
         }  
         .button
         {
-            width: 200px;
-            height: 50px;
-            background: transparent;
-            border-radius: 5px;
+            width: 40%;
+            height: 4rem;
+
+            margin-top: 2rem;
             margin-left: 50%;
             transform: translateX(-50%);
-            margin-top: 1rem;
-            font-size: 1.5rem;
+
+            font-size: 2rem;
+            font-family: monospace;
+            letter-spacing: 0.2rem;
+
+            border-radius: 0.5rem;
+            border: none;
+
+            background: lightgreen;
 
             transition: 0.3s;
         }
@@ -55,6 +66,40 @@
             color: #fff;
         }
 
+        /* lista dados names */
+        .list-name
+        {
+
+           /* background: red; */
+
+            position: absolute;
+            width: calc(100% - 2.5rem);
+            height: 60%;
+        }
+        .list-name li
+        {
+            list-style-type: none;
+
+            font-size: 1.5rem;
+            font-family: monospace;
+            letter-spacing: 0.2rem;
+
+            
+            margin-left: -3.5rem;
+            width: 100%;
+            padding: 1.3rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        .usernames_txt
+        {
+            font-size: 2rem;
+            font-family: monospace;
+            letter-spacing: 0.2rem;
+            text-align: center;
+        }
+
+
     </style>
 
 </head>
@@ -63,12 +108,22 @@
      <!-- teste de push javascripts -->
 
      <form class="form-main" action="">
-        <input id="formName" type="text" placeholder="username" name="name" class="form-validadion">
+        <input maxlength="10" spellcheck="false" id="formName" type="text" placeholder="username..." name="name" class="form-validadion">
         <br>
-        <input maxlength="8" id="formPassword" type="password" placeholder="password" name="password" class="form-validadion">
+        <input spellcheck="false" maxlength="8" id="formPassword" type="password" placeholder="password..." name="password" class="form-validadion">
         <br>
+
         <button type="button" onclick="sendForm()" class="button">Criar</button>
+
+        <button type="button" onclick="openForm()" class="button">Entrar</button>
+        <br><br><br>
+        <hr>
+        
+        <!-- lista com dados que foi digitados... -->
+        <h1 class="usernames_txt">Usuarios:</h1>
+        <ul id="listDados" class="list-name"></ul>
     </form>
+
 
     <script>
 
@@ -88,22 +143,32 @@
                 // joga valor do input/name dentro da array dadosLista... 
                 // dadosNames.push(name);
 
-                if(name.length >= 5 && pass.length >= 5)
+                if(name.length >= 2 && pass.length >= 4)
                 {
-                    dadosNames.push(name);
+                    // loop de verificação de nome repetido
+                    for(let i = 0; i <= dadosNames.length; i++)
+                    {
+                        if(dadosNames[i - 1] === name)
+                        {
+                            console.log("Name repetido!")
+                        }else
+                        {
+                             dadosNames.push(name);
+                        }
+                    };
+
                     dadosPass.push(pass);
+                    addList();
                 }else
                 {
                     alert("Seu nome é muito pequeno")
                 }
 
-                addList();
-                console.log("lista de nome :")
-                console.log(dadosNames);
-                console.log("lista de senhas :")
-                console.log(dadosPass)
+                //console.log(dadosNames.length)
+
 
                 document.getElementById('formName').value = "";
+                document.getElementById('formPassword').value = "";
 
                 } else
                 // caso o usuario não digite nada no input e enviar ele chama o alert abaixo
@@ -113,7 +178,17 @@
             }
             function addList()
             {
-                
+
+                let nameList = document.getElementById("formName").value; // valor do input name
+                let ul = document.getElementById("listDados");// lista não ordenada
+
+                let list = document.createElement("li"); // criação do elemento li
+                list.appendChild(document.createTextNode(nameList))
+                // list.appendChild(txtNode)
+                // let listNew = document.getElementById("ListNames")
+                  ul.appendChild(list)
+                // document.body.insertBefore(list, ul.firstElementChild)
+
             }
 
     </script>
